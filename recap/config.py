@@ -9,11 +9,29 @@ MUSIC = ROOT / "assets" / "music"
 for p in (WORK, OUTPUT):
     p.mkdir(parents=True, exist_ok=True)
 
+KEY_FILE_DEFAULT = "/home/box/.secrets/gemini_gaen_key"
+
 def gemini_key():
+    """Key lookup order: RECAP_GEMINI_KEY_FILE (or the default secrets file) -> GEMINI_API_KEY -> GOOGLE_API_KEY
+    -> GEMINI_TTS_API_KEY_2. Never logged."""
+    f = os.environ.get("RECAP_GEMINI_KEY_FILE", KEY_FILE_DEFAULT)
+    if f and os.path.isfile(f):
+        k = open(f).read().strip()
+        if k:
+            return k
     for k in ("GEMINI_API_KEY", "GOOGLE_API_KEY", "GEMINI_TTS_API_KEY_2"):
         if os.environ.get(k):
             return os.environ[k]
-    raise RuntimeError("No Gemini API key in env (GEMINI_API_KEY / GEMINI_TTS_API_KEY_2)")
+    raise RuntimeError("No Gemini API key (key file / GEMINI_API_KEY / GEMINI_TTS_API_KEY_2)")
+
+def gemini_key_source():
+    f = os.environ.get("RECAP_GEMINI_KEY_FILE", KEY_FILE_DEFAULT)
+    if f and os.path.isfile(f) and open(f).read().strip():
+        return f"file:{f}"
+    for k in ("GEMINI_API_KEY", "GOOGLE_API_KEY", "GEMINI_TTS_API_KEY_2"):
+        if os.environ.get(k):
+            return f"env:{k}"
+    return "none"
 
 # Strongest first. Free-tier keys have 0 quota for Pro -> falls through to Flash.
 ANALYSIS_MODELS = [m.strip() for m in os.environ.get(

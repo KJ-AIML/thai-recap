@@ -1,0 +1,312 @@
+{
+ "job": "20261026-183815_conan-hotel-bombing",
+ "videos": {
+  "9:16": "/workspace/thai-recap/output/20261026-183815_conan-hotel-bombing_9x16.mp4"
+ },
+ "thumbnails": {
+  "9:16": "/workspace/thai-recap/output/20261026-183815_conan-hotel-bombing_thumb_9x16.jpg"
+ },
+ "duration": 70.47,
+ "tts_provider": "edge",
+ "voice": "th-TH-NiwatNeural",
+ "analysis_model": "gemini-3.5-flash",
+ "script_model": "gemini-3.5-flash",
+ "title": "ไขรหัสระเบิดโรงแรม",
+ "title2": "โคนันลุยล่าคนร้าย",
+ "caption": "โคนันและเอริต้องแข่งกับเวลาเพื่อถอดรหัสลับมือวางระเบิดโรงแรมก่อนถึงกำหนดเวลา!",
+ "hashtags": [
+  "#สรุปหนัง",
+  "#โคนัน",
+  "#ยอดนักสืบจิ๋วโคนัน",
+  "#เล่าหนัง",
+  "#อนิเมะสืบสวน"
+ ],
+ "lines": [
+  {
+   "text": "เมื่อมือวางระเบิดโรงแรมส่งรหัสลับขู่บึ้มในเวลาจำกัด",
+   "src_start": 635.0,
+   "src_end": 641.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "มือวางระเบิด",
+   "t0": 0.0,
+   "dur": 2.884208,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "โคนันที่เพิ่งซื้อหนังสือสืบสวนเล่มโปรดมาอย่างอารมณ์ดี",
+   "src_start": 15.0,
+   "src_end": 21.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "โคนัน",
+   "t0": 2.984208,
+   "dur": 3.069833,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ก็ต้องตกใจเมื่อ เซระ ขี่มอเตอร์ไซค์เข้ามาทักทายกะทันหัน",
+   "src_start": 60.0,
+   "src_end": 66.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "เซระ",
+   "t0": 6.154041,
+   "dur": 2.965167,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เธอวานให้เขาเปิดขวดน้ำอัดลมจนพุ่งอัดใส่เสื้อโคนันเต็มเต็ม",
+   "src_start": 88.0,
+   "src_end": 94.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "น้ำอัดลม",
+   "t0": 9.219208,
+   "dur": 3.263708,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เซระเลยชวนโคนันไปอาบน้ำที่ห้องพักในโรงแรมของเธอซะเลย",
+   "src_start": 115.0,
+   "src_end": 121.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "ห้องพัก",
+   "t0": 12.582916,
+   "dur": 3.021125,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "แต่แล้วโคนันก็เอะใจเพราะช่วงนี้มีข่าวระเบิดโรงแรมต่อเนื่อง",
+   "src_start": 152.0,
+   "src_end": 158.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "ข่าวระเบิด",
+   "t0": 15.704041,
+   "dur": 3.135125,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เซระจึงหลอกล่อด้วยการบอกว่าเธอมีรหัสลับฉบับจริงของคนร้าย",
+   "src_start": 170.0,
+   "src_end": 176.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "รหัสลับ",
+   "t0": 18.939166,
+   "dur": 3.327833,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ขณะโคนันกำลังอาบน้ำกลับมีเด็กสาวปริศนาแอบจ้องมองอยู่ห่างห่าง",
+   "src_start": 333.0,
+   "src_end": 339.0,
+   "visual": "still",
+   "emphasis": true,
+   "keyword": "เด็กสาวปริศนา",
+   "t0": 22.366999,
+   "dur": 3.569,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "พอออกมาเซระก็เปิดหน้าจอคอมให้ดูจดหมายขู่ระเบิดสุดซับซ้อน",
+   "src_start": 379.0,
+   "src_end": 385.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "จดหมายขู่",
+   "t0": 26.035999,
+   "dur": 3.465417,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "โคนันสังเกตแก้วชาจนรู้ว่ามีผู้ใหญ่ชาวอังกฤษซ่อนอยู่ในห้อง",
+   "src_start": 460.0,
+   "src_end": 466.0,
+   "visual": "still",
+   "emphasis": true,
+   "keyword": "ชาวอังกฤษ",
+   "t0": 29.601416,
+   "dur": 3.489542,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "ทันใดนั้นเกิดเสียงทะเลาะเมื่อแขกชื่อ รินซากิ โวยวายใส่พนักงาน",
+   "src_start": 553.0,
+   "src_end": 559.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "รินซากิ",
+   "t0": 33.190958,
+   "dur": 3.262875,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เขาฉุนขาดเพราะพบรหัสลับถูกหยอดไว้ในห้องสองหนึ่งหนึ่งสี่",
+   "src_start": 580.0,
+   "src_end": 586.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ห้องสองหนึ่งหนึ่งสี่",
+   "t0": 36.553833000000004,
+   "dur": 3.3215,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ก่อนที่สายขู่จะโทรมาเตือนว่าจะระเบิดตอนสิบเจ็ดนาฬิกา",
+   "src_start": 670.0,
+   "src_end": 676.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "สิบเจ็ดนาฬิกา",
+   "t0": 39.975333000000006,
+   "dur": 3.174,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ทนายสาว เอริ คิซากิ จึงเข้ามาสอบปากคำแม่บ้าน รงดะ ทันที",
+   "src_start": 830.0,
+   "src_end": 836.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "เอริ",
+   "t0": 43.24933300000001,
+   "dur": 3.445708,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เธอพบว่ารินซากิเป็นนักเขียนนิยายที่มีประวัติโดนแบนมาก่อน",
+   "src_start": 860.0,
+   "src_end": 866.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "นักเขียนนิยาย",
+   "t0": 46.795041000000005,
+   "dur": 3.235458,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เอริใช้ข้อกฎหมายขู่จนรินซากิยอมให้เข้าไปตรวจค้นภายในห้อง",
+   "src_start": 965.0,
+   "src_end": 971.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ตรวจค้น",
+   "t0": 50.13049900000001,
+   "dur": 3.496667,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ใครจะไปคิดว่าจะมีหญิงแต่งตัวจัดจ้านโผล่จากห้องน้ำแล้วหนีไป",
+   "src_start": 1040.0,
+   "src_end": 1046.0,
+   "visual": "still",
+   "emphasis": true,
+   "keyword": "แต่งตัวจัดจ้าน",
+   "t0": 53.72716600000001,
+   "dur": 3.376333,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "โคนันรีบตรวจคอมพิวเตอร์และเครื่องทำความชื้นก่อนถูกไล่ออกมา",
+   "src_start": 1105.0,
+   "src_end": 1111.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "คอมพิวเตอร์",
+   "t0": 57.20349900000001,
+   "dur": 3.12125,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เมื่อเวลาใกล้หมดพวกเขาก็ถอดรหัสจนเหลือห้องเป้าหมายหกห้อง",
+   "src_start": 1205.0,
+   "src_end": 1211.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "หกห้อง",
+   "t0": 60.424749000000006,
+   "dur": 2.94975,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "พวกเขาต้องวางแผนอพยพคนแบบเงียบที่สุดเพื่อไม่ให้คนร้ายรู้ตัว",
+   "src_start": 1282.0,
+   "src_end": 1288.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "วางแผนอพยพ",
+   "t0": 63.47449900000001,
+   "dur": 3.43025,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เมื่อเอริเดินไปเคาะประตูห้องหนึ่งสามศูนย์สอง อะไรจะรออยู่",
+   "src_start": 1332.0,
+   "src_end": 1338.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "เคาะประตู",
+   "t0": 67.004749,
+   "dur": 2.864917,
+   "fit": "cut",
+   "tts": "edge"
+  }
+ ],
+ "cost": [
+  {
+   "item": "scene analysis (gemini-3.5-flash)",
+   "usd": 0.0892,
+   "detail": "137371 in / 6839 out tokens, 47s"
+  },
+  {
+   "item": "thai script (gemini-3.5-flash)",
+   "usd": 0.02196,
+   "detail": "2766 in / 6860 out tokens, 29s"
+  },
+  {
+   "item": "TTS edge",
+   "usd": 0.0,
+   "detail": "1178 chars (free)"
+  }
+ ],
+ "cost_usd_paid_tier_est": 0.1112,
+ "cost_thb_est": 3.67,
+ "thumbnail_time": 1358.5,
+ "elapsed_s": 419.9,
+ "options": {
+  "src": "work/dl/conan_ep1202-1203_hotel_bombing.mp4",
+  "length": 75,
+  "gender": "male",
+  "speed": 1.1,
+  "aspect": "9:16",
+  "visual": "mixed",
+  "tts": "edge",
+  "bgm": "auto",
+  "bgm_level": 0.16,
+  "credit": "ที่มา: ยอดนักสืบจิ๋วโคนัน © Gosho Aoyama / Shogakukan / TMS Entertainment",
+  "name": "conan-hotel-bombing"
+ }
+}

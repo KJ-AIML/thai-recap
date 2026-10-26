@@ -1,0 +1,313 @@
+{
+ "job": "20261026-185248_rickmorty-evil-morty",
+ "videos": {
+  "9:16": "/workspace/thai-recap/output/20261026-185248_rickmorty-evil-morty_9x16.mp4"
+ },
+ "thumbnails": {
+  "9:16": "/workspace/thai-recap/output/20261026-185248_rickmorty-evil-morty_thumb_9x16.jpg"
+ },
+ "duration": 71.64,
+ "tts_provider": "edge",
+ "voice": "th-TH-NiwatNeural",
+ "analysis_model": "gemini-3-flash-preview",
+ "script_model": "gemini-3-flash-preview",
+ "title": "ตำนานอีวิลมอร์ตี้",
+ "title2": "จากไอ้ขี้แพ้สู่จอมบงการ",
+ "caption": "จากมอร์ตี้ที่ทุกคนดูถูก สู่ตัวร้ายที่ฉลาดที่สุดในจักรวาล! เล่าตำนานอีวิลมอร์ตี้ใน 75 วินาที",
+ "hashtags": [
+  "#สรุปหนัง",
+  "#ริกมอร์ตี้",
+  "#RickAndMorty",
+  "#EvilMorty",
+  "#เล่าหนัง",
+  "#การ์ตูน"
+ ],
+ "lines": [
+  {
+   "text": "ใครจะไปคิดว่ามอร์ตี้ซื่อๆ จะกลายเป็นจอมบงการที่ฆ่าริกเป็นร้อย",
+   "src_start": 0.0,
+   "src_end": 7.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "จอมบงการ",
+   "t0": 0.0,
+   "dur": 3.455417,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "มอร์ตี้เบื่อที่ต้องตามเช็ดขี้เช็ดเยี่ยวให้ริกจนเขาขอลาออก",
+   "src_start": 16.0,
+   "src_end": 22.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ลาออก",
+   "t0": 3.5554170000000003,
+   "dur": 2.955,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เขาแอบทำเครื่องมือลับและใส่ผ้าปิดตาที่เปลี่ยนมิติไปตลอดกาล",
+   "src_start": 42.0,
+   "src_end": 50.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "ผ้าปิดตา",
+   "t0": 6.610417,
+   "dur": 3.207917,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เขาสั่งริกหุ่นเชิดไล่ฆ่าริกคนอื่นและจับตัวมอร์ตี้มาทรมาน",
+   "src_start": 73.0,
+   "src_end": 80.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ฆ่า",
+   "t0": 9.918334,
+   "dur": 3.545917,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ริกพระเอกถูกใส่ร้ายว่าเป็นฆาตกรจนต้องหนีตายเพื่อหาตัวจริง",
+   "src_start": 114.0,
+   "src_end": 120.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ฆาตกร",
+   "t0": 13.564251,
+   "dur": 3.189292,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ในฐานลับพวกมอร์ตี้ที่โดนขังเริ่มลุกฮือจนเกิดสงครามกลางมิติ",
+   "src_start": 149.0,
+   "src_end": 156.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ลุกฮือ",
+   "t0": 16.853543000000002,
+   "dur": 3.287333,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ริกหุ่นเชิดโดนรุมสับเละโดยไม่มีใครรู้ว่าตัวจริงเนียนหนีไปได้",
+   "src_start": 197.0,
+   "src_end": 204.0,
+   "visual": "still",
+   "emphasis": true,
+   "keyword": "เนียน",
+   "t0": 20.240876,
+   "dur": 3.52675,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เวลาผ่านไปเขากลับมาอีกครั้งในฐานะผู้สมัครประธานาธิบดี",
+   "src_start": 245.0,
+   "src_end": 252.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ประธานาธิบดี",
+   "t0": 23.867626,
+   "dur": 3.391208,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ถึงจะโดนลอบสังหารเขาก็รอดมาได้และสั่งเชือดสภาเงียบทิ้งทันที",
+   "src_start": 340.0,
+   "src_end": 348.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "เชือด",
+   "t0": 27.358834,
+   "dur": 3.432792,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เขาเผยความจริงว่าพวกริกใช้หลานตัวเองเป็นแค่สินค้ามาโดยตลอด",
+   "src_start": 441.0,
+   "src_end": 448.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "สินค้า",
+   "t0": 30.891626000000002,
+   "dur": 3.233417,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เป้าหมายคือการเจาะสมองริกเพื่อเอาสูตรลับทำลายกำแพงมิติ",
+   "src_start": 519.0,
+   "src_end": 525.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "สูตรลับ",
+   "t0": 34.225043,
+   "dur": 3.174667,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "ซิทาเดลระเบิดเป็นจลเมื่อเขามุดพอร์ตสีทองหนีไปยังจักรวาลใหม่",
+   "src_start": 553.0,
+   "src_end": 560.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "ระเบิด",
+   "t0": 37.49971,
+   "dur": 3.216583,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "แต่ความสงบก็จบลงเมื่อริกพระเอกตามไปป่วนจนต้องมาร่วมมือกัน",
+   "src_start": 692.0,
+   "src_end": 698.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ร่วมมือ",
+   "t0": 40.816293,
+   "dur": 3.354333,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ทั้งคู่ต้องฟัดกับริกไพรม์ที่สร้างอาวุธลบตัวตนออกจากทุกความจริง",
+   "src_start": 811.0,
+   "src_end": 818.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ลบตัวตน",
+   "t0": 44.270626,
+   "dur": 3.310667,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "อีวิลมอร์ตี้โชว์เหนือด้วยการแฮ็กระบบจนริกไพรม์หมดทางสู้",
+   "src_start": 914.0,
+   "src_end": 921.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "แฮ็ก",
+   "t0": 47.681293,
+   "dur": 2.805417,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เขาปล่อยให้ริกพระเอกปิดบัญชีแค้นก่อนจะชิ่งหนีไปพร้อมข้อมูล",
+   "src_start": 992.0,
+   "src_end": 1000.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "บัญชีแค้น",
+   "t0": 50.58671,
+   "dur": 3.351458,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "แต่ริกยังแอบซ่อนไฟล์ลับไว้ในระบบเพื่อกวนประสาทเขาส่งท้าย",
+   "src_start": 1032.0,
+   "src_end": 1038.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "กวนประสาท",
+   "t0": 54.038168,
+   "dur": 3.353917,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ทั้งคู่ยังต้องไปฟัดกับสัตว์ประหลาดและมานั่งกินข้าวปรับทุกข์กัน",
+   "src_start": 1117.0,
+   "src_end": 1124.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ปรับทุกข์",
+   "t0": 57.492084999999996,
+   "dur": 3.050333,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ริกยังส่งรูปก้นตัวเองมาทิ้งทวนให้อีวิลมอร์ตี้เจ็บใจเล่น",
+   "src_start": 1232.0,
+   "src_end": 1238.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "เจ็บใจ",
+   "t0": 60.642418,
+   "dur": 3.334333,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "สุดท้ายเขาก็ยังเป็นตัวอันตรายที่ฉลาดเกินเบอร์และไม่มีใครคุมได้",
+   "src_start": 1332.0,
+   "src_end": 1339.0,
+   "visual": "video",
+   "emphasis": false,
+   "keyword": "ฉลาด",
+   "t0": 64.076751,
+   "dur": 3.38575,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "แต่ไหงตอนจบพี่แกดันไปติดคุกกาลเวลานั่งคุยกับมอนสเตอร์ซะงั้น",
+   "src_start": 1376.0,
+   "src_end": 1383.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "ติดคุก",
+   "t0": 67.562501,
+   "dur": 3.472792,
+   "fit": "cut",
+   "tts": "edge"
+  }
+ ],
+ "cost": [
+  {
+   "item": "scene analysis (gemini-3-flash-preview)",
+   "usd": 0.09525,
+   "detail": "130633 in / 9978 out tokens, 72s"
+  },
+  {
+   "item": "thai script (gemini-3-flash-preview)",
+   "usd": 0.01809,
+   "detail": "3033 in / 5526 out tokens, 22s"
+  },
+  {
+   "item": "TTS edge",
+   "usd": 0.0,
+   "detail": "1216 chars (free)"
+  }
+ ],
+ "cost_usd_paid_tier_est": 0.1133,
+ "cost_thb_est": 3.74,
+ "thumbnail_time": 220.5,
+ "elapsed_s": 195.1,
+ "options": {
+  "src": "work/dl/rickmorty_rise_and_fall_of_evil_morty.mp4",
+  "length": 75,
+  "gender": "male",
+  "speed": 1.1,
+  "aspect": "9:16",
+  "visual": "mixed",
+  "tts": "edge",
+  "bgm": "auto",
+  "bgm_level": 0.16,
+  "credit": "ที่มา: Rick and Morty © Adult Swim / Warner Bros. Discovery",
+  "name": "rickmorty-evil-morty"
+ }
+}
