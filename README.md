@@ -54,3 +54,17 @@ Everything is cached in `work/` (download, analysis, script, TTS) so re-renders 
 - CC‑BY sources need attribution → use `--credit`.
 - Free-tier Gemini keys have 0 quota for Pro models → the tool falls back to Flash automatically. Enable billing for Pro.
 - Edge TTS is an unofficial endpoint — fine for testing, use Gemini/ElevenLabs/Azure for anything commercial.
+
+## TTS notes (tested 26 Oct 2026)
+| Provider | Result | Notes |
+|---|---|---|
+| Gemini `gemini-3.1-flash-tts-preview` (Charon/Kore) | **Best**: exact transcript, fluent, fewest pauses, takes a style prompt | **Free tier = 10 requests/day/model** → per-line mode only covers ~10 lines/day. Enable billing, or try `RECAP_TTS_BATCH=1` (whole script in 1 request, split on pauses; experimental) |
+| Gemini `gemini-3.8-flash-tts` | Rejected | read the English style prompt aloud / very slow with long pauses |
+| Gemini `gemini-3.8-flash-lite-tts` | Rejected | dropped whole lines in a 3-line test, misread tone marks |
+| ElevenLabs `eleven_v3` (`language_code=th`) | Good, natural | `eleven_multilingual_v2` rejects Thai. Free plan has ~1k chars left = not enough for one 75 s script (~1.2k chars) |
+| Edge TTS Niwat / Premwadee | Good, exact transcript, free | unofficial endpoint; Premwadee/Achara intermittently return *NoAudioReceived*, so rate is fixed at +0% and speed is applied with `atempo` |
+| Google Cloud Chirp3-HD | not tested | `GOOGLE_TTS_API_KEY` currently rejected as invalid |
+
+Fallback logic: the primary provider is probed on the first uncached line; if its daily quota is gone the whole script goes to
+one fallback (ElevenLabs if enough credits → Google → Edge) so the narrator stays one voice. Per-line fallback is used only
+when ≤25 % of lines fail (`max_mixed`).

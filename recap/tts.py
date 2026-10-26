@@ -56,10 +56,10 @@ def _gemini(text, voice, out_raw: Path, timeout=45, attempts=2):
     raise TTSQuota(f"Gemini TTS failed: {last}")
 
 def _edge(text, voice, out_raw: Path, speed):
+    """Always +0% rate (non-zero rates intermittently return NoAudioReceived); speed is applied later with atempo."""
     import edge_tts
-    pct = int(round((speed - 1) * 100))
     async def go():
-        await edge_tts.Communicate(text, voice, rate=f"{pct:+d}%").save(str(out_raw))
+        await edge_tts.Communicate(text, voice).save(str(out_raw))
     for k in range(4):
         try:
             asyncio.run(go())
@@ -70,14 +70,25 @@ def _edge(text, voice, out_raw: Path, speed):
         time.sleep(1.5 * (k + 1))
     raise TTSQuota(f"Edge TTS failed: {last if 'last' in dir() else 'no audio'}")
 
+import threading
+_EL_LOCK = threading.Lock()
+
 def _eleven(text, voice, out_raw: Path):
-    r = requests.post(f"https://api.elevenlabs.io/v1/text-to-speech/{voice}?output_format=mp3_44100_128",
-                      headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"]}, timeout=120,
-                      json={"text": text, "model_id": "eleven_v3", "language_code": "th"})
+    with _EL_LOCK:   # free/starter plans allow very few concurrent requests
+        for k in range(3):
+            r = _eleven_once(text, voice)
+            if r.status_code != 429 or "concurrent" not in r.text:
+                break
+            time.sleep(2 * (k + 1))
     if r.status_code != 200:
         raise TTSQuota(f"ElevenLabs {r.status_code}: {r.text[:200]}")
     out_raw.write_bytes(r.content)
     return {"model": "eleven_v3", "chars": len(text)}
+
+def _eleven_once(text, voice):
+    return requests.post(f"https://api.elevenlabs.io/v1/text-to-speech/{voice}?output_format=mp3_44100_128",
+                      headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"]}, timeout=120,
+                      json={"text": text, "model_id": "eleven_v3", "language_code": "th"})
 
 def _google(text, voice, out_raw: Path, speed):
     r = requests.post("https://texttospeech.googleapis.com/v1/text:synthesize",
@@ -124,7 +135,7 @@ def _call(prov, text, voice, raw, speed, fast=True):
     return _google(text, voice, raw, speed)
 
 def _raw_path(workdir, prov, voice, text, speed):
-    h = sha(f"{prov}|{voice}|{text}|{speed if prov in ('edge','google') else ''}")
+    h = sha(f"{prov}|{voice}|{text}|{speed if prov == 'google' else ''}")
     return workdir / f"raw_{h}.{'mp3' if prov in ('edge','elevenlabs') else 'wav'}"
 
 def fallback_chain(primary, lines):
@@ -178,7 +189,7 @@ def synthesize(lines, provider, gender, speed, workdir: Path, prog, deadline_s=2
                 except Exception as ex:
                     print(f"  line {i+1}: {prov} failed ({str(ex)[:100]})", flush=True)
                     continue
-            tempo = 1.0 if prov in ("edge", "google") else speed
+            tempo = 1.0 if prov == "google" else speed
             out = workdir / f"line_{i:02d}.wav"
             ln["dur"] = _post(raw, out, tempo); ln["audio"] = str(out); ln["tts"] = prov; ln["voice"] = voice
             done[0] += 1
@@ -200,7 +211,7 @@ def synthesize(lines, provider, gender, speed, workdir: Path, prog, deadline_s=2
                 continue
             chain = [fb] + [c for c in chain if c not in (fb, chain[0])]
             break
-    workers = {"gemini": 4, "elevenlabs": 2}.get(chain[0], 4)
+    workers = {"gemini": 4, "elevenlabs": 1, "edge": 2}.get(chain[0], 3)
     with ThreadPoolExecutor(workers) as ex:
         used = list(ex.map(lambda i: voice_one(i, chain), range(len(lines))))
     n_fb = sum(1 for u in used if u != chain[0])

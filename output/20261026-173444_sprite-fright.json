@@ -1,0 +1,312 @@
+{
+ "job": "20261026-173444_sprite-fright",
+ "videos": {
+  "16:9": "/workspace/thai-recap/output/20261026-173444_sprite-fright_16x9.mp4"
+ },
+ "thumbnails": {
+  "16:9": "/workspace/thai-recap/output/20261026-173444_sprite-fright_thumb_16x9.jpg"
+ },
+ "duration": 70.53,
+ "tts_provider": "edge",
+ "voice": "th-TH-NiwatNeural",
+ "analysis_model": "gemini-3.5-flash",
+ "script_model": "gemini-3.5-flash",
+ "title": "แก๊งซ่าปะทะภูตเห็ดโหด",
+ "title2": "น่ารักแต่โคตรโหด",
+ "caption": "อย่ามองใครแค่ภายนอก! เมื่อแก๊งวัยรุ่นนิสัยเสียเข้าไปทำลายป่า จนโดนภูตเห็ดตัวจิ๋วเอาคืนอย่างโหดเหี้ยม",
+ "hashtags": [
+  "#สรุปหนัง",
+  "#SpriteFright",
+  "#สปอยหนัง",
+  "#อนิเมชัน",
+  "#หนังสั้น"
+ ],
+ "lines": [
+  {
+   "text": "ใครจะไปคิดว่าภูตเห็ดสุดน่ารัก จะกลายเป็นเพชฌฆาตโหดล่าชีวิตคน",
+   "src_start": 270.0,
+   "src_end": 275.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "เพชฌฆาตโหด",
+   "t0": 0.0,
+   "dur": 3.686417,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "แก๊งวัยรุ่นสุดกร่างกลุ่มหนึ่ง ได้เดินทางมาตั้งแคมป์ในป่าลึก",
+   "src_start": 26.0,
+   "src_end": 32.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "แก๊งวัยรุ่น",
+   "t0": 3.786417,
+   "dur": 2.856292,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เอลลี่ สาวรักธรรมชาติ กำลังเพลิดเพลินกับการนั่งวาดรูปหอยทาก",
+   "src_start": 13.0,
+   "src_end": 19.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "เอลลี่",
+   "t0": 6.742709,
+   "dur": 3.220125,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เพื่อนร่วมทางกลับส่งเสียงดัง ทิ้งขยะเกลื่อนป่าแบบไม่สนใจใคร",
+   "src_start": 32.0,
+   "src_end": 38.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "ทิ้งขยะ",
+   "t0": 10.062833999999999,
+   "dur": 3.136917,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เอลลี่ช่วยปลดห่วงพลาสติก ออกจากตัวนกน้อยจนหลุดเป็นอิสระ",
+   "src_start": 57.0,
+   "src_end": 63.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "นกน้อย",
+   "t0": 13.299750999999999,
+   "dur": 3.236833,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เมื่อเดินทางมาถึงลานกางเต็นท์ ทุกคนก็เริ่มก่อความวุ่นวายทันที",
+   "src_start": 79.0,
+   "src_end": 85.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "ก่อความวุ่นวาย",
+   "t0": 16.636584,
+   "dur": 3.262208,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "แต่แล้ว ฟิล หนุ่มอ้วนสายกิน ดันทำเกลือหกใส่เห็ดสีแดงเข้า",
+   "src_start": 108.0,
+   "src_end": 114.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "ทำเกลือหกใส่",
+   "t0": 19.998791999999998,
+   "dur": 2.98325,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ทันใดนั้น เห็ดดอกนั้นก็มีชีวิต แล้ววิ่งหนีเข้าไปในพุ่มไม้",
+   "src_start": 115.0,
+   "src_end": 121.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "มีชีวิต",
+   "t0": 23.082041999999998,
+   "dur": 3.252292,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เอลลี่แอบตามไปจนได้พบกับ หมู่บ้านภูตเห็ดสุดน่ารักจำนวนมาก",
+   "src_start": 153.0,
+   "src_end": 159.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "หมู่บ้านภูตเห็ด",
+   "t0": 26.434334,
+   "dur": 3.1345,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "หัวหน้าภูตเห็ดออกมาต้อนรับ แต่เอลลี่แอบเห็นภาพชวนขนลุกเข้า",
+   "src_start": 216.0,
+   "src_end": 221.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "ชวนขนลุก",
+   "t0": 29.668834,
+   "dur": 3.2985,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "มีภูตเห็ดสองตัว กำลังลากขยะเปื้อนเลือดเข้าไปในถ้ำลับ",
+   "src_start": 221.0,
+   "src_end": 226.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "ขยะเปื้อนเลือด",
+   "t0": 33.067334,
+   "dur": 2.696125,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "กลางดึกคืนนั้น เอลลี่ตื่นมาพบว่า เพื่อนทุกคนหายตัวไปหมดแล้ว",
+   "src_start": 253.0,
+   "src_end": 259.0,
+   "visual": "still",
+   "emphasis": true,
+   "keyword": "หายตัวไป",
+   "t0": 35.863459000000006,
+   "dur": 3.26375,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เธอต้องช็อกสุดขีด เมื่อพวกเห็ดละลายร่างฟิลกลายเป็นน้ำเมือก",
+   "src_start": 275.0,
+   "src_end": 281.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "ละลายร่าง",
+   "t0": 39.22720900000001,
+   "dur": 2.730417,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "พวกมันประกาศแก้แค้นมนุษย์ แล้วเปิดฉากไล่ล่ากลุ่มวัยรุ่นทันที",
+   "src_start": 294.0,
+   "src_end": 300.0,
+   "visual": "still",
+   "emphasis": true,
+   "keyword": "เปิดฉากไล่ล่า",
+   "t0": 42.057626000000006,
+   "dur": 3.200917,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "สาวงามถูกใยแมงมุมยักษ์ม้วนพัน ส่วนหนุ่มกล้ามโดนหอยทากรุมกัด",
+   "src_start": 348.0,
+   "src_end": 355.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "หอยทากรุมกัด",
+   "t0": 45.358543000000004,
+   "dur": 3.689875,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "ส่วนหนุ่มหมวกบักเก็ต ก็พลาดท่าตกหลุมบ่อน้ำพิษจนไม่เหลือซาก",
+   "src_start": 377.0,
+   "src_end": 383.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "ตกหลุมบ่อน้ำพิษ",
+   "t0": 49.14841800000001,
+   "dur": 3.1095,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เอลลี่บังเอิญทำขนมรสเค็มตกใส่พวกมัน จนพบจุดอ่อนสุดเหลือเชื่อ",
+   "src_start": 411.0,
+   "src_end": 417.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "จุดอ่อน",
+   "t0": 52.357918000000005,
+   "dur": 3.820333,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "ที่แท้เกลือและของเค็ม สามารถละลายพวกภูตเห็ดให้กลายเป็นฟองได้!",
+   "src_start": 437.0,
+   "src_end": 443.0,
+   "visual": "video",
+   "emphasis": true,
+   "keyword": "กลายเป็นฟอง",
+   "t0": 56.278251000000004,
+   "dur": 3.103292,
+   "fit": "cut",
+   "tts": "edge"
+  },
+  {
+   "text": "เอลลี่ใช้ถั่วเค็มสู้กลับ แต่สุดท้ายกลับโดนพวกมันดึงขาจนล้มลง",
+   "src_start": 461.0,
+   "src_end": 467.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "ดึงขาจนล้มลง",
+   "t0": 59.481543,
+   "dur": 3.557875,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "โชคดีที่นกน้อยบินมาขี้ใส่หัวหัวหน้าเห็ด ช่วยเธอไว้ได้ทันเวลา",
+   "src_start": 476.0,
+   "src_end": 482.0,
+   "visual": "still",
+   "emphasis": true,
+   "keyword": "บินมาขี้ใส่หัว",
+   "t0": 63.139418,
+   "dur": 3.516833,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  },
+  {
+   "text": "เอลลี่โหนเชือกข้ามเหวหนีรอด ปล่อยพวกเห็ดเดินร้องเพลงต่อชิลๆ",
+   "src_start": 494.0,
+   "src_end": 500.0,
+   "visual": "still",
+   "emphasis": false,
+   "keyword": "หนีรอด",
+   "t0": 66.756251,
+   "dur": 3.176667,
+   "fit": "still+kenburns",
+   "tts": "edge"
+  }
+ ],
+ "cost": [
+  {
+   "item": "scene analysis (gemini-3.5-flash) [cached; first-run cost]",
+   "usd": 0.04484,
+   "detail": "53863 in / 5969 out tokens"
+  },
+  {
+   "item": "thai script (gemini-3.5-flash) [cached; first-run cost]",
+   "usd": 0.03023,
+   "detail": "2854 in / 9602 out tokens, 60s"
+  },
+  {
+   "item": "TTS edge",
+   "usd": 0.0,
+   "detail": "1227 chars (free)"
+  }
+ ],
+ "cost_usd_paid_tier_est": 0.0751,
+ "cost_thb_est": 2.48,
+ "thumbnail_time": 481.0,
+ "elapsed_s": 77.1,
+ "options": {
+  "src": "https://www.youtube.com/watch?v=_cMxraX_5RE",
+  "length": 75,
+  "gender": "male",
+  "speed": 1.1,
+  "aspect": "16:9",
+  "visual": "image",
+  "tts": "edge",
+  "bgm": "auto",
+  "bgm_level": 0.16,
+  "credit": "ภาพ: Sprite Fright © Blender Foundation (CC BY 4.0)",
+  "name": ""
+ }
+}

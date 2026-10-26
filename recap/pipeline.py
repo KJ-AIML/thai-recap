@@ -42,7 +42,7 @@ def run(opt: Options, cb=None):
         factor = min(1.4 / opt.speed, total / opt.length)
         prog(56, f"บทยาวไป {total:.0f}s → เร่งเสียงเป็น x{opt.speed*factor:.2f}")
         for ln in lines:
-            if ln["tts"] in ("gemini", "elevenlabs"):
+            if ln["tts"] in ("gemini", "elevenlabs", "edge"):
                 raw = Path(ln["raw"]) if ln.get("raw") else tts._raw_path(srcdir / "tts", ln["tts"], ln["voice"], ln["text"], opt.speed)
                 if raw.exists():
                     ln["dur"] = tts._post(raw, Path(ln["audio"]), opt.speed * factor)
