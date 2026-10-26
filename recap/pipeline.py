@@ -19,6 +19,7 @@ class Options:
     bgm_level: float = 0.16
     credit: str = ""              # attribution line burned in small text (needed for CC-BY sources)
     name: str = ""
+    brief: str = ""               # extra creative brief / allowed facts for the script (e.g. a website "movie recap")
 
 CPS = 12.5  # Thai chars per second spoken by Gemini TTS at 1.0x (measured ~12.3)
 
@@ -28,7 +29,7 @@ def run(opt: Options, cb=None):
     srcdir = master.parent
     an = analyze.analyze(master, prog)
     prog(24, f"แบ่งได้ {len(an['scenes'])} ฉาก ด้วย {an['model']}")
-    script = analyze.write_script(an, opt.length, CPS * opt.speed, opt.visual, prog, srcdir)
+    script = analyze.write_script(an, opt.length, CPS * opt.speed, opt.visual, prog, srcdir, opt.brief)
     lines = [dict(l) for l in script["lines"]]
     if not lines:
         raise RuntimeError("Script came back empty")

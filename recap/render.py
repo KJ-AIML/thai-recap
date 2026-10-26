@@ -24,7 +24,11 @@ def _fg_box(aspect, sw, sh):
     """fg crop (source px) + fg size on canvas."""
     W, H = canvas(aspect)
     src_ar = sw / sh
-    if aspect == "9:16":
+    if aspect == "9:16" and src_ar < 1.0:
+        # portrait source (phone screen recordings, mobile site captures): big 4:5-ish window under the title band
+        ar = max(src_ar, 0.80)
+        fw = W; fh = int(round(W / ar / 2) * 2); fh = min(fh, H - 560); y = 560
+    elif aspect == "9:16":
         ar = max(min(src_ar, 1.6), 4 / 3)      # crop scope/16:9 films to 1.6:1 so the picture is bigger on a phone
         fw = W; fh = int(round(W / ar / 2) * 2)
         y = 580 + (760 - fh) // 2 if fh <= 760 else (H - fh) // 2

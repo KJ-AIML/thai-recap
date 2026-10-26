@@ -92,8 +92,14 @@ def analyze(master: Path, prog, media_resolution=None):
     cache.write_text(json.dumps(data, ensure_ascii=False, indent=1))
     return data
 
-def write_script(analysis, target_sec, cps, visual_mode, prog, cache_dir: Path):
-    key = f"script_{int(target_sec)}_{visual_mode}_{cps:.1f}.json"
+BRIEF_BLOCK = """
+
+โจทย์พิเศษจากผู้สั่งงาน (สำคัญกว่ากฎสไตล์ด้านบน ถ้าขัดกันให้ทำตามข้อนี้):
+{brief}"""
+
+def write_script(analysis, target_sec, cps, visual_mode, prog, cache_dir: Path, brief: str = ""):
+    from .util import sha as _sha
+    key = f"script_{int(target_sec)}_{visual_mode}_{cps:.1f}" + (f"_{_sha(brief, 8)}" if brief else "") + ".json"
     cache = cache_dir / key
     if cache.exists():
         prog(32, "ใช้บทพากย์ที่แคชไว้")
@@ -113,6 +119,8 @@ def write_script(analysis, target_sec, cps, visual_mode, prog, cache_dir: Path):
     nlines = max(6, round(target_sec / 3.6))
     prompt = SCRIPT_PROMPT.format(target=target_sec, chars=chars, nlines=nlines, dur=dur,
                                   scenes=json.dumps(ctx, ensure_ascii=False), visual_hint=VISUAL_HINTS.get(visual_mode, ""))
+    if brief:
+        prompt += BRIEF_BLOCK.format(brief=brief)
     prog(25, "Gemini กำลังเขียนบทพากย์ไทยสไตล์ช่องเล่าหนัง")
     data, model = generate_json([prompt], prog, "thai script", temperature=0.9)
     if isinstance(data, list):

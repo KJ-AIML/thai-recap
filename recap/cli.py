@@ -14,9 +14,11 @@ def main():
     ap.add_argument("--bgm-level", type=float, default=0.16)
     ap.add_argument("--credit", default="")
     ap.add_argument("--name", default="")
+    ap.add_argument("--brief-file", default="", help="text file with an extra creative brief / allowed facts")
     a = ap.parse_args()
     r = run(Options(src=a.src, length=a.length, gender=a.gender, speed=a.speed, aspect=a.aspect, visual=a.visual,
-                    tts=a.tts, bgm=a.bgm, bgm_level=a.bgm_level, credit=a.credit, name=a.name))
+                    tts=a.tts, bgm=a.bgm, bgm_level=a.bgm_level, credit=a.credit, name=a.name,
+                    brief=open(a.brief_file, encoding="utf-8").read() if a.brief_file else ""))
     r.pop("log", None)
     print(json.dumps({k: r[k] for k in ("videos", "thumbnails", "duration", "tts_provider", "voice", "analysis_model",
                                         "cost_usd_paid_tier_est", "cost_thb_est", "elapsed_s")}, ensure_ascii=False, indent=1))
