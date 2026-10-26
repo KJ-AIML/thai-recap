@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+google-genai
+pythainlp
+pillow
+requests
+edge-tts
+yt-dlp

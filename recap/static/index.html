@@ -1,0 +1,53 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thai Recap — วางลิงก์ ได้คลิปเล่าเรื่องพากย์ไทย</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+ body{font-family:Kanit,system-ui,sans-serif;background:#0f1115;color:#eee;margin:0}
+ .wrap{max-width:980px;margin:0 auto;padding:28px}
+ h1{font-weight:800;margin:0 0 4px}h1 span{color:#ffe500}.sub{color:#9aa;margin-bottom:22px}
+ .card{background:#181b22;border:1px solid #2a2f3a;border-radius:14px;padding:20px;margin-bottom:18px}
+ label{display:block;font-size:14px;color:#aab;margin:10px 0 4px}
+ input,select{width:100%;box-sizing:border-box;background:#0f1115;color:#eee;border:1px solid #333a48;border-radius:8px;padding:10px;font:inherit}
+ .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+ button{background:#ffe500;color:#111;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:800;cursor:pointer;margin-top:16px}
+ button:disabled{opacity:.5}.bar{height:12px;background:#262b36;border-radius:8px;overflow:hidden}.bar>div{height:100%;background:#ffe500;width:0;transition:width .4s}
+ pre{white-space:pre-wrap;font-size:12px;color:#9ab;max-height:220px;overflow:auto}
+ .res{display:flex;gap:18px;flex-wrap:wrap}.res video{max-height:560px;border-radius:10px;background:#000}.res img{max-width:300px;border-radius:10px}
+ a{color:#ffe500}.small{font-size:13px;color:#99a}
+</style></head><body><div class="wrap">
+<h1>Thai <span>Recap</span></h1><div class="sub">วางลิงก์วิดีโอ → Gemini ดูคลิป เขียนบท → พากย์ไทย + ซับ → ได้คลิปเล่าเรื่องพร้อมโพสต์</div>
+<form id="f" class="card">
+ <label>ลิงก์วิดีโอ (YouTube / ไฟล์ .mp4 ตรง) — Video URL</label><input name="url" placeholder="https://www.youtube.com/watch?v=...">
+ <label>หรืออัปโหลดไฟล์ — or upload a file</label><input type="file" name="file" accept="video/*">
+ <div class="grid">
+  <div><label>ความยาว (วินาที)</label><input name="length" type="number" value="75" min="20" max="600"></div>
+  <div><label>เสียงพากย์</label><select name="gender"><option value="male">ชาย</option><option value="female">หญิง</option></select></div>
+  <div><label>ความเร็วเสียง</label><select name="speed"><option>1.0</option><option>1.1</option><option selected>1.15</option><option>1.25</option><option>1.35</option></select></div>
+  <div><label>สัดส่วนภาพ</label><select name="aspect"><option value="9:16">9:16 (TikTok/Shorts)</option><option value="16:9">16:9 (YouTube)</option><option value="both">ทั้งสองแบบ</option></select></div>
+  <div><label>เน้นภาพ</label><select name="visual"><option value="video">วิดีโอ</option><option value="mixed" selected>ผสม</option><option value="image">ภาพนิ่ง (Ken Burns)</option></select></div>
+  <div><label>TTS</label><select name="tts"><option value="gemini">Gemini TTS (ดีสุด)</option><option value="edge">Edge (ฟรี)</option><option value="elevenlabs">ElevenLabs v3</option><option value="google">Google Cloud Chirp3-HD</option></select></div>
+  <div><label>เพลงพื้นหลัง</label><select name="bgm"><option value="auto">มี (assets/music)</option><option value="none">ไม่มี</option></select></div>
+  <div><label>เครดิตต้นฉบับ</label><input name="credit" placeholder="เช่น ภาพ: Blender Foundation (CC BY)"></div>
+ </div>
+ <button id="go">สร้างคลิป ▶</button>
+</form>
+<div id="st" class="card" style="display:none"><div class="bar"><div id="pb"></div></div><p id="msg"></p><pre id="log"></pre></div>
+<div id="out" class="card" style="display:none"></div>
+<p class="small">รันบนเครื่องตัวเอง · ใช้กับคอนเทนต์ที่มีสิทธิ์เท่านั้น (คลิปของตัวเอง, CC, public domain)</p>
+</div><script>
+const f=document.getElementById('f'),go=document.getElementById('go');
+f.onsubmit=async e=>{e.preventDefault();go.disabled=true;
+ const r=await fetch('/api/jobs',{method:'POST',body:new FormData(f)});const j=await r.json();
+ if(!r.ok){alert(j.detail||'error');go.disabled=false;return}
+ document.getElementById('st').style.display='block';poll(j.id)};
+async function poll(id){const r=await fetch('/api/jobs/'+id);const j=await r.json();
+ document.getElementById('pb').style.width=(j.pct||0)+'%';document.getElementById('msg').textContent=(j.state==='error'?'❌ ':'')+j.msg;
+ document.getElementById('log').textContent=(j.log||[]).join('\n');
+ if(j.state==='done'){go.disabled=false;const o=document.getElementById('out');o.style.display='block';const R=j.result;let h='<div class="res">';
+  for(const[a,u] of Object.entries(j.urls.videos)) h+=`<div><video src="${u}" controls></video><br><a href="${u}" download>⬇ ดาวน์โหลด ${a}</a></div>`;
+  for(const[a,u] of Object.entries(j.urls.thumbnails)) h+=`<div><img src="${u}"><br><a href="${u}" download>⬇ ปก ${a}</a></div>`;
+  h+=`</div><p><b>${R.title||''}</b> · ${R.duration}s · TTS ${R.tts_provider}/${R.voice} · ${R.analysis_model}<br>ค่าใช้จ่ายประมาณ $${R.cost_usd_paid_tier_est} (~฿${R.cost_thb_est})</p><p>${R.caption||''}<br>${(R.hashtags||[]).join(' ')}</p>`;
+  o.innerHTML=h;return}
+ if(j.state==='error'){go.disabled=false;return}
+ setTimeout(()=>poll(id),1500)}
+</script></body></html>
