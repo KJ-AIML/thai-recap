@@ -64,7 +64,7 @@ def generate_json(parts, prog, label, models=None, temperature=0.7, media_resolu
     models = [m for m in models if m not in bad] + [m for m in models if m in bad]
     last = None
     for model in models:
-        for attempt in range(2):
+        for attempt in range(int(os.environ.get("RECAP_LLM_ATTEMPTS", "2"))):
             try:
                 cfg = dict(response_mime_type="application/json", temperature=temperature)
                 if media_resolution:
@@ -92,7 +92,7 @@ def generate_json(parts, prog, label, models=None, temperature=0.7, media_resolu
                 if "timed out" in msg.lower() or "timeout" in msg.lower():
                     print(f"  {model} timed out -> next model", flush=True); _mark_bad(model)
                     break
-                wait = 8 * (attempt + 1)
+                wait = min(60, 8 * (attempt + 1))
                 print(f"  {model} attempt {attempt+1} failed: {msg[:160]} -> retry in {wait}s", flush=True)
                 time.sleep(wait)
     raise RuntimeError(f"All Gemini models failed for {label}: {last}")

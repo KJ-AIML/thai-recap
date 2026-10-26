@@ -54,6 +54,7 @@ Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour,
 Style: Sub,{font} ExtraBold,{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,0,0,0,0,100,100,0,0,1,7,3,5,40,40,0,222
 Style: Title,{font} Black,{118 if aspect=='9:16' else 84},&H0000E5FF,&H0000E5FF,&H00000000,&H96000000,0,0,0,0,100,100,0,0,1,8,4,5,40,40,0,222
 Style: Title2,{font} ExtraBold,{72 if aspect=='9:16' else 54},&H00FFFFFF,&H00FFFFFF,&H000000C8,&H96000000,0,0,0,0,100,100,0,0,3,14,0,5,40,40,0,222
+Style: Chapter,{font} ExtraBold,58,&H00FFFFFF,&H00FFFFFF,&H000000C8,&H96000000,0,0,0,0,100,100,0,0,3,16,0,7,40,40,0,222
 Style: Credit,{font} Bold,{30 if aspect=='9:16' else 26},&H90FFFFFF,&H90FFFFFF,&H90000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,2,30,30,{40 if aspect=='9:16' else 18},222
 
 [Events]
@@ -68,7 +69,14 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         ev.append(f"Dialogue: 2,{sec_to_ass(0)},{sec_to_ass(min(3.5,total_dur))},Title,,0,0,0,,{{\\pos({W//2},{150})\\fad(150,300)}}{_esc(title)}")
     if credit:
         ev.append(f"Dialogue: 1,{sec_to_ass(0)},{sec_to_ass(total_dur)},Credit,,0,0,0,,{_esc(credit)}")
+    prev_ch = None
     for ln in lines:
+        ch = ln.get("chapter") or ""
+        if ch and ch != prev_ch and ch.lower() != "hook" and not title_on:
+            # chapter card (long-form 16:9): red tag top-left for 3.2 s
+            ev.append(f"Dialogue: 2,{sec_to_ass(ln['t0'])},{sec_to_ass(ln['t0'] + 3.2)},Chapter,,0,0,0,,"
+                      f"{{\\an7\\pos(60,50)\\fad(200,300)}}{_esc(ch)}")
+        prev_ch = ch
         chunks = chunk_line(ln["text"], max_w)
         weights = [max(1, vis_len(c)) for c in chunks]
         t = ln["t0"]; span = ln["dur"]

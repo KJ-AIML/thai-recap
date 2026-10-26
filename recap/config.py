@@ -46,6 +46,7 @@ PRICES = {
     "gemini-3.8-flash": (0.5, 3.0),
     "gemini-3.5-flash": (0.5, 3.0),
     "gemini-3-flash-preview": (0.5, 3.0),
+    "gemini-3.1-flash-lite": (0.25, 1.5),
     "tts-gemini": (0.5, 10.0),          # text in, audio out tokens
     "tts-elevenlabs_per_1k_chars": 0.15,
     "tts-google_per_1m_chars": 30.0,    # Chirp3-HD

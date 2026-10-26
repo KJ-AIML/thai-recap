@@ -51,8 +51,14 @@ def render_segment(i, ln, master, aspect, sw, sh, vdur, out: Path):
         ts = s + L * 0.45
         inp = ["-ss", f"{ts:.3f}", "-i", str(master), "-frames:v", "1"]
         pre = f"[0:v]trim=end_frame=1,loop=loop={nfr}:size=1:start=0,setpts=N/30/TB,fps=30"
-        zexpr = f"1+0.13*on/{nfr}" if not emph else f"1.02+0.18*on/{nfr}"
-        how = "still+kenburns"
+        mode = i % 4      # vary the Ken Burns move so long videos don't feel looped
+        if emph:
+            zexpr = f"1.02+0.18*on/{nfr}"; kx = 0
+        elif mode == 3:
+            zexpr = f"1.15-0.13*on/{nfr}"; kx = 0
+        else:
+            zexpr = f"1+0.13*on/{nfr}"; kx = (0, -0.8, 0.8)[mode]
+        how = f"still+kenburns{mode}"
     else:
         r = L / d
         if r >= 1.0:
@@ -66,9 +72,10 @@ def render_segment(i, ln, master, aspect, sw, sh, vdur, out: Path):
             inp = ["-ss", f"{s:.3f}", "-t", f"{L:.3f}", "-i", str(master)]
             pre = f"[0:v]setpts=(PTS-STARTPTS)*{1/0.72:.4f},fps=30,tpad=stop_mode=clone:stop_duration={d:.2f}"; how = "slow+freeze"
         zexpr = (f"1+0.10*exp(-on/5)+0.05*on/{nfr}" if emph else f"1+0.045*on/{nfr}")
+        kx = 0
     # fg: crop to target AR, upscale 2x for smooth zoompan, zoom, back to canvas size
     fg = (f"crop={cw}:{ch}:(iw-{cw})/2:(ih-{ch})/2,scale={fw*2}:{fh*2}:flags=lanczos,"
-          f"zoompan=z='{zexpr}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={fw}x{fh}:fps=30")
+          f"zoompan=z='{zexpr}':x='(iw-iw/zoom)/2*(1+({kx})*on/{nfr})':y='ih/2-(ih/zoom/2)':d=1:s={fw}x{fh}:fps=30")
     bgw, bgh = W // 4, H // 4
     bg = (f"scale={bgw}:{bgh}:force_original_aspect_ratio=increase,crop={bgw}:{bgh},boxblur=12:3,"
           f"scale={W}:{H},eq=brightness=-0.08:saturation=1.25")

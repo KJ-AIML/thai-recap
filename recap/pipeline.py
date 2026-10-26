@@ -76,7 +76,7 @@ def run(opt: Options, cb=None):
         "tts_provider": prov, "voice": voice, "analysis_model": an["model"], "script_model": script.get("model"),
         "title": script.get("title_th"), "title2": script.get("title_th_line2"),
         "caption": script.get("caption"), "hashtags": script.get("hashtags"),
-        "lines": [{k: l.get(k) for k in ("text", "src_start", "src_end", "visual", "emphasis", "keyword", "t0", "dur", "fit", "tts")} for l in lines],
+        "lines": [{k: l.get(k) for k in ("chapter", "text", "src_start", "src_end", "visual", "emphasis", "keyword", "t0", "dur", "fit", "tts")} for l in lines],
         "cost": prog.cost, "cost_usd_paid_tier_est": round(usd, 4), "cost_thb_est": round(usd * USD_THB, 2),
         "thumbnail_time": round(ft, 2), "elapsed_s": round(time.time() - t0, 1), "options": asdict(opt),
     }

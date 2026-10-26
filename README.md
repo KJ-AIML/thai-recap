@@ -68,3 +68,15 @@ Everything is cached in `work/` (download, analysis, script, TTS) so re-renders 
 Fallback logic: the primary provider is probed on the first uncached line; if its daily quota is gone the whole script goes to
 one fallback (ElevenLabs if enough credits → Google → Edge) so the narrator stays one voice. Per-line fallback is used only
 when ≤25 % of lines fail (`max_mixed`).
+
+## Long form (8-12 min "สปอยล์หนัง") / คลิปยาว
+- `--length 240+` switches to the long-form path: sources longer than ~33 min (`RECAP_CHUNK_SEC`, default 1500 s) are analysed in
+  chunks (360p proxy, LOW media resolution, cached per chunk). If a chunk result is incomplete or loops (weak fallback model),
+  that chunk is redone as 4 shorter pieces automatically.
+- The script is written **part by part** (one Gemini call per chunk, cached per part) with chapters (hook → acts → ending);
+  16:9 shows a red chapter tag at each chapter start. Reused footage windows are moved to unused shots (`dedupe_visuals`),
+  and Ken Burns moves rotate (zoom in / pan left / pan right / zoom out).
+- `tools/build_compilation.py clips_dir out.mp4` joins several official clips (named `NN_<id>.mp4` in story order) into one
+  story master and drops repeated footage it can fingerprint (2 fps dHash, letterbox-normalised).
+- `tools/check_narration.py video.mp4 30 240` transcribes 30 s starting at 240 s for a spot check.
+- Useful env: `RECAP_LLM_ATTEMPTS` (retries per model on 503), `RECAP_LLM_TIMEOUT`, `RECAP_MODELS`, `RECAP_LONG_ONECALL=1`.
