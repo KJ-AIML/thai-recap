@@ -4,6 +4,17 @@ from pathlib import Path
 from .util import run, sha, file_sha, probe_video
 from .config import WORK
 
+def save_chapters(url: str, d: Path):
+    """YouTube chapters (e.g. episode list of a compilation) -> chapters.json; used to chunk long-form analysis."""
+    import json
+    try:
+        info = json.loads(run(["yt-dlp", "--no-playlist", "-J", url], timeout=120))
+        ch = [{"start": float(c["start_time"]), "end": float(c["end_time"]), "title": c.get("title") or ""}
+              for c in (info.get("chapters") or [])]
+    except Exception:
+        ch = []
+    (d / "chapters.json").write_text(json.dumps(ch, ensure_ascii=False, indent=1))
+
 def fetch(url_or_path: str, prog) -> Path:
     p = Path(url_or_path)
     if p.exists():
@@ -27,6 +38,8 @@ def fetch(url_or_path: str, prog) -> Path:
                      "bv*[height<=720][vcodec^=avc1]+ba[ext=m4a]/bv*[height<=720]+ba/b[height<=720]/b",
                      "--merge-output-format", "mp4", "-o", str(d / "raw.%(ext)s"), url_or_path], timeout=1800)
             raw = next(d.glob("raw.*"))
+        if not (d / "chapters.json").exists() and "://" in url_or_path:
+            save_chapters(url_or_path, d)
     master = d / "master.mp4"
     if not master.exists():
         prog(6, "แปลงไฟล์ต้นฉบับเป็น H.264 720p 30fps")

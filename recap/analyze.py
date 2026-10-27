@@ -69,6 +69,12 @@ VISUAL_HINTS = {
 
 CHUNK_SEC = int(os.environ.get("RECAP_CHUNK_SEC", "1500"))
 
+EPISODE_NOTE = """
+This video is EPISODE {k} of {n} of a compilation (it starts at {off:.0f} s of the full compilation); the episode title is
+"{title}". Each episode is a self-contained story. Timestamps you return must be relative to THIS part (00:00 = start of
+this part). Main characters seen in earlier episodes (for names only): {prev}
+"""
+
 CHUNK_NOTE = """
 This video is PART {k} of {n} of a longer film (it starts at {off:.0f} s of the full film). Timestamps you return must be
 relative to THIS part (00:00 = start of this part). Story so far (from the earlier parts, for names/context only):
@@ -84,7 +90,7 @@ def _coverage_ok(d, cd):
     repeated = len(descs) - len(set(descs))
     return end >= 0.8 * cd and repeated <= max(2, len(descs) // 8)
 
-def _analyze_piece(src, cdir, tag, off, cd, label, prev, prog, pct, depth=0):
+def _analyze_piece(src, cdir, tag, off, cd, label, prev, prog, pct, depth=0, title=None):
     """Analyse one piece of the proxy (cached). Weak/overloaded fallback models sometimes stop early or loop
     ("screen fades to black" x N); then the piece is re-done as 4 shorter sub-pieces and merged."""
     cj = cdir / f"{tag}.json"
@@ -100,7 +106,9 @@ def _analyze_piece(src, cdir, tag, off, cd, label, prev, prog, pct, depth=0):
     prog(pct, f"Gemini ดูวิดีโอช่วง {label} ({off/60:.0f}-{(off+cd)/60:.0f} นาที)")
     nsc = f"{max(8, int(cd / 22))}-{max(14, int(cd / 12))} scenes, each 3-30 s"
     k, n = label.split("/")[0], label.split("/")[-1]
-    prompt = ANALYSIS_PROMPT.format(dur=cd, scene_rule=nsc) + CHUNK_NOTE.format(k=k, n=n, off=off, prev=prev)
+    note = (EPISODE_NOTE.format(k=k, n=n, off=off, prev=prev, title=title) if title
+            else CHUNK_NOTE.format(k=k, n=n, off=off, prev=prev))
+    prompt = ANALYSIS_PROMPT.format(dur=cd, scene_rule=nsc) + note
     d, model = generate_json([f, prompt], prog, f"scene analysis part {label}", temperature=0.3,
                              media_resolution=types.MediaResolution.MEDIA_RESOLUTION_LOW)
     if isinstance(d, list):
@@ -131,12 +139,17 @@ def _analyze_piece(src, cdir, tag, off, cd, label, prev, prog, pct, depth=0):
 def _analyze_chunked(master: Path, prog, dur: float):
     """Long sources: split the 360p proxy into ~CHUNK_SEC pieces, analyse each (cached), merge the scene lists."""
     proxy = master.parent / "proxy.mp4"; src = proxy if proxy.exists() else master
-    n = max(2, round(dur / CHUNK_SEC)); step = dur / n
-    cdir = master.parent / "chunks"; cdir.mkdir(exist_ok=True)
-    merged = {"scenes": [], "characters": [], "chunks": []}; costs = []; prev = "(this is the first part)"
-    for k in range(n):
-        off = k * step; cd = min(step, dur - off)
-        d = _analyze_piece(src, cdir, f"chunk_{k:02d}", off, cd, f"{k+1}/{n}", prev, prog, 12 + 12 * k / n)
+    eps = _episodes(master, dur)
+    if eps:
+        bounds = [(e["start"], min(e["end"], dur) - e["start"], e["title"]) for e in eps]
+    else:
+        n = max(2, round(dur / CHUNK_SEC)); step = dur / n
+        bounds = [(k * step, min(step, dur - k * step), None) for k in range(n)]
+    n = len(bounds)
+    cdir = master.parent / ("episodes" if eps else "chunks"); cdir.mkdir(exist_ok=True)
+    merged = {"scenes": [], "characters": [], "chunks": [], "episodic": bool(eps)}; costs = []; prev = "(this is the first part)"
+    for k, (off, cd, title) in enumerate(bounds):
+        d = _analyze_piece(src, cdir, f"chunk_{k:02d}", off, cd, f"{k+1}/{n}", prev, prog, 12 + 12 * k / n, title=title)
         for sc in d["scenes"]:
             a = min(ts_to_sec(sc.get("start", 0)), cd); b = min(max(ts_to_sec(sc.get("end", 0)), a + 0.5), cd)
             sc["start_s"] = round(off + a, 2); sc["end_s"] = round(off + b, 2); sc["part"] = k + 1
@@ -144,11 +157,12 @@ def _analyze_chunked(master: Path, prog, dur: float):
         names = {c.get("id") for c in merged["characters"]}
         merged["characters"] += [c for c in d.get("characters", []) if c.get("id") not in names]
         bt = d.get("best_thumbnail_time")
-        merged["chunks"].append({"part": k + 1, "offset": off, "logline": d.get("logline"), "ending": d.get("ending"),
+        merged["chunks"].append({"part": k + 1, "offset": off, "duration": cd, "episode_title": title, "logline": d.get("logline"), "ending": d.get("ending"),
                                  "best_thumbnail_s": off + ts_to_sec(bt) if bt else None, "model": d.get("model")})
         for key in ("title", "genre"):
             merged.setdefault(key, d.get(key))
-        prev = " | ".join(f"part {c['part']}: {c['logline']}" for c in merged["chunks"])[-1500:]
+        prev = (json.dumps([{"id": c.get("id"), "look": c.get("look")} for c in merged["characters"]][:12], ensure_ascii=False)
+                if eps else " | ".join(f"part {c['part']}: {c['logline']}" for c in merged["chunks"])[-1500:])
         costs.append(d["_cost"])
     merged["logline"] = " ".join(c["logline"] or "" for c in merged["chunks"])
     merged["ending"] = merged["chunks"][-1]["ending"]
@@ -161,9 +175,20 @@ def _analyze_chunked(master: Path, prog, dur: float):
                        "detail": "; ".join(c["detail"] for c in costs)}
     return merged
 
+def _episodes(master: Path, dur: float):
+    """Chapters saved by source.fetch (compilation episode list). Used as analysis/script parts when every chapter is
+    a real episode (>= 120 s) and RECAP_EPISODES != 0."""
+    f = master.parent / "chapters.json"
+    if os.environ.get("RECAP_EPISODES", "1") == "0" or not f.exists():
+        return None
+    ch = [c for c in json.loads(f.read_text()) if c["start"] < dur - 5]
+    if len(ch) < 2 or any(c["end"] - c["start"] < 120 for c in ch):
+        return None
+    return ch
+
 def analyze(master: Path, prog, media_resolution=None):
     dur = probe_duration(master)
-    if dur > CHUNK_SEC * 1.3:
+    if dur > CHUNK_SEC * 1.3 or (dur > 900 and _episodes(master, dur)):
         cache = master.parent / "analysis_chunked.json"
         if cache.exists():
             d = json.loads(cache.read_text())
@@ -339,9 +364,15 @@ def _write_long_by_parts(analysis, target_sec, cps, prog, brief, cache_dir=None,
     for k in range(n):
         sc = [{"t": f"{s['start_s']:.0f}-{s['end_s']:.0f}", "what": s["description"], "drama": s.get("dramatic_score"),
                "shot": s.get("shot")} for s in analysis["scenes"] if s.get("part") == k + 1]
-        share = target_sec / n
+        share = target_sec * (chunks[k].get("duration") or dur / n) / dur
         nl = max(8, round(share / 4.6))
         extra = ""
+        ep = chunks[k].get("episode_title")
+        if ep:
+            extra += (f"\nช่วงนี้คือตอนที่ {k+1} จาก {n} ของคลิปรวมตอน ชื่อตอนต้นฉบับ: {ep} แต่ละตอนเป็นเรื่องจบในตอน"
+                      " ให้ทุกบรรทัดของช่วงนี้ (ยกเว้น hook) ใช้ chapter เดียวกัน เป็นชื่อตอนภาษาไทยสนุก ๆ ที่สื่อถึงตอนนี้"
+                      " เปิดตอนด้วยบรรทัดแนะนำว่าตอนนี้เกิดอะไรขึ้น (ถ้าไม่ใช่ตอนแรก ให้เชื่อมแบบ ตอนต่อไป... ) แล้วเล่าให้จบตอน"
+                      " ปิดตอนด้วยมุกหรือหมัดเด็ด 1 บรรทัด\n")
         if k == 0:
             extra = ("\nเริ่มด้วย hook 2-3 บรรทัด (chapter = hook) ที่ดึงฉากยิ่งใหญ่ที่สุดของเรื่องมาเปิด ใช้ภาพจากฉากเหล่านี้ได้: "
                      + json.dumps([{"t": f"{h['start_s']:.0f}-{h['end_s']:.0f}", "what": h["description"]} for h in hooks], ensure_ascii=False)
@@ -349,7 +380,8 @@ def _write_long_by_parts(analysis, target_sec, cps, prog, brief, cache_dir=None,
         if brief:
             extra += "\nโจทย์พิเศษ (สำคัญ):\n" + brief + "\n"
         end_rule = ("\nนี่คือช่วงสุดท้าย: เล่าไคลแมกซ์และตอนจบให้ครบ สรุปชะตาตัวละครหลัก แล้วปิดด้วยประโยคเท่ ๆ หรือฮา ๆ 1-2 บรรทัด"
-                    if k == n - 1 else "\nยังไม่ใช่ตอนจบ ห้ามสรุปปิดเรื่อง")
+                    if k == n - 1 else ("\nนี่ยังไม่ใช่ตอนสุดท้ายของคลิปรวม เล่าตอนนี้ให้จบตอน แต่ห้ามกล่าวลาหรือสรุปปิดทั้งคลิป" if ep
+                                        else "\nยังไม่ใช่ตอนจบ ห้ามสรุปปิดเรื่อง"))
         last = "\n".join(l["text"] for l in out["lines"][-6:]) or "(ยังไม่มี นี่คือช่วงแรก)"
         prompt = PART_PROMPT.format(mins=target_sec / 60, k=k + 1, n=n, overview=overview, chars=chars, done=len(out["lines"]),
                                     last=last, scenes=json.dumps(sc, ensure_ascii=False), extra=extra, nlines=nl,
