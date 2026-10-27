@@ -4,3 +4,6 @@ output/*.mp4
 output/*.jpg
 __pycache__/
 *.pyc
+output/
+.env
+*.key
